@@ -35,7 +35,7 @@ define('SQL_DIR', './sql/');
  * It is not used directly in code, just a convenient
  * define used further in this file.
  */
-define('CONFIG_DIR', './');
+define('CONFIG_DIR', '');
 
 /**
  * Filename of a configuration file.
@@ -58,25 +58,12 @@ define('CUSTOM_FOOTER_FILE', CONFIG_DIR . 'config.footer.inc.php');
 define('VERSION_CHECK_DEFAULT', true);
 
 /**
- * Path to gettext.inc file. Useful when you want php-gettext somewhere else,
- * eg. /usr/share/php/gettext/gettext.inc.
+ * Path to files with compiled locales (*.mo)
  */
-define('GETTEXT_INC', './libraries/php-gettext/gettext.inc');
-/**
- * Path to tcpdf.php file. Useful when you want to use system tcpdf,
- * eg. /usr/share/php/tcpdf/tcpdf.php.
- */
-define('TCPDF_INC', './libraries/tcpdf/tcpdf.php');
-
-/**
- * Path to the phpseclib. Useful when you want to use system phpseclib.
- */
-define('PHPSECLIB_INC_DIR', './libraries/phpseclib/');
+define('LOCALE_PATH', './locale/');
 
 /**
  * Avoid referring to nonexistent files (causes warnings when open_basedir
  * is used)
  */
 define('K_PATH_IMAGES', '');
-
-?>

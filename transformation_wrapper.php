@@ -5,6 +5,7 @@
  *
  * @package PhpMyAdmin
  */
+use PMA\libraries\Response;
 
 /**
  *
@@ -21,7 +22,7 @@ $cfgRelation = PMA_getRelationsParam();
 /**
  * Ensures db and table are valid, else moves to the "parent" script
  */
-require_once './libraries/db_table_exists.lib.php';
+require_once './libraries/db_table_exists.inc.php';
 
 
 /**
@@ -58,17 +59,17 @@ foreach ($request_params as $one_request_param) {
 $GLOBALS['dbi']->selectDb($db);
 if (isset($where_clause)) {
     $result = $GLOBALS['dbi']->query(
-        'SELECT * FROM ' . PMA_Util::backquote($table)
+        'SELECT * FROM ' . PMA\libraries\Util::backquote($table)
         . ' WHERE ' . $where_clause . ';',
         null,
-        PMA_DatabaseInterface::QUERY_STORE
+        PMA\libraries\DatabaseInterface::QUERY_STORE
     );
     $row = $GLOBALS['dbi']->fetchAssoc($result);
 } else {
     $result = $GLOBALS['dbi']->query(
-        'SELECT * FROM ' . PMA_Util::backquote($table) . ' LIMIT 1;',
+        'SELECT * FROM ' . PMA\libraries\Util::backquote($table) . ' LIMIT 1;',
         null,
-        PMA_DatabaseInterface::QUERY_STORE
+        PMA\libraries\DatabaseInterface::QUERY_STORE
     );
     $row = $GLOBALS['dbi']->fetchAssoc($result);
 }
@@ -95,7 +96,7 @@ if ($cfgRelation['commwork'] && $cfgRelation['mimework']) {
 }
 
 // Only output the http headers
-$response = PMA_Response::getInstance();
+$response = Response::getInstance();
 $response->getHeader()->sendHttpHeaders();
 
 // [MIME]
@@ -160,4 +161,3 @@ if (! isset($_REQUEST['resize'])) {
     ImageDestroy($srcImage);
     ImageDestroy($destImage);
 }
-?>
